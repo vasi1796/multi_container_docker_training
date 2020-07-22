@@ -1,0 +1,20 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t vasi1796/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run vasi1796/react-test -e CI=true npm test -- --coverage
+
+after_success:
+    - docker build -t vasi1796/multi-client ./client 
+    - docker build -t vasi1796/multi-nginx ./nginx
+    - docker build -t vasi1796/multi-server ./server
+    - docker build -t vasi1796/multi-worker ./worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+    - docker push vasi1796/multi-client
+    - docker push vasi1796/multi-nginx
+    - docker push vasi1796/multi-server
+    - docker push vasi1796/multi-worker
