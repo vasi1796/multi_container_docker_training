@@ -13,7 +13,7 @@ after_success:
     - docker build -t vasi1796/multi-nginx ./nginx
     - docker build -t vasi1796/multi-server ./server
     - docker build -t vasi1796/multi-worker ./worker
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+    - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
     - docker push vasi1796/multi-client
     - docker push vasi1796/multi-nginx
     - docker push vasi1796/multi-server
