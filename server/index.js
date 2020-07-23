@@ -28,9 +28,7 @@ const redisClient = redis.createClient({
 });
 
 const redisPublisher = redisClient.duplicate();
-app.get('/',(req,res)=>{
-    res.send('Hi');
-});
+
 app.get('/values/all',async(req,res)=>{
     pgClient.query("SELECT * FROM values",(err,resp)=>{
         console.log(resp);
