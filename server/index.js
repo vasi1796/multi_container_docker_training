@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 const {Pool} = require("pg");
 const pgClient = new Pool({
-    user:keys.pgHost,
+    user:keys.pgUser,
     host:keys.pgHost,
     database:keys.pgDatabase,
     password:keys.pgPassword,
